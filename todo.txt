@@ -1,0 +1,38 @@
+TODO:
+
+- Create Board for place pieces on it
+    - Pure responsibility :
+        1. Managing the board
+    - set so that the pieces moves inbound (inbound?)
+        if not return nil
+    - 
+- Create Pawn obj
+    - Pure responsibility :
+        1. Manage how Pawn works, moves, movesisvalid?
+    - def mov_dirs
+        - set [1, 0]
+    - if inbound? == false
+        - ask user to put other location
+- Set color using symbol :black, :white
+- Find how to pick and place pieces based on the position
+- Give suggestion to user for possible moves to make 
+
+
+FLOW:
+
+1. GAME START BY GAME.new
+2. Player pick desired piece [ pick(b2_location)  ]
+    - terminal decide if location.nil?
+        - if location.valid?, terminal show which piece was choosen
+            - then, terminal display possible routes
+                - suggestion: use piece @moves_dir, check if it is inbound?
+        - if not, return 'nothing in b2_location'
+    - terminal ask for which possible route player want to go
+        - if enemy_other_piece.exist? 
+            - capture (remove the enemy_other_piece node)
+            - set used piece to b2_location (exp: place_piece(knight, b2_location))
+        - if check, proceed with #check 
+        - end move, switch player
+3. player place the piece on valid position
+
+
