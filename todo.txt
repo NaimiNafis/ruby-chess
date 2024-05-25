@@ -6,7 +6,7 @@ TODO:
     - set so that the pieces moves inbound (inbound?)
         if not return nil
     - 
-- Create Pawn obj
+- Create Pawn pieces
     - Pure responsibility :
         1. Manage how Pawn works, moves, movesisvalid?
     - def mov_dirs
@@ -16,6 +16,7 @@ TODO:
 - Set color using symbol :black, :white
 - Find how to pick and place pieces based on the position
 - Give suggestion to user for possible moves to make 
+- Create other pieces class
 
 
 FLOW:
