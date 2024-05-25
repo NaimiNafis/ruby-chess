@@ -38,4 +38,18 @@ describe Board do
             expect(board[location]).to eql("Y")
         end
     end
+
+    describe "#in_bounds?" do
+        it "return true if location in bounds" do
+            board = Board.new
+            location = [0, 0]
+            expect(board.in_bounds?(location)).to eql(true)
+        end
+
+        it "return false if location out of bounds" do
+            board = Board.new
+            location = [-1, -2]
+            expect(board.in_bounds?(location)).to eql(false)
+        end
+    end
 end

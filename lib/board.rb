@@ -21,8 +21,9 @@ class Board
         grid[row][column]
     end
 
-    def inbound?
-        
+    def in_bounds?(location)
+        row, column = location
+        row < grid.length && column < grid.first.length && row >= 0 && column >= 0
     end
 
     def get_piece(location)
