@@ -1,3 +1,6 @@
+require_relative 'pawn'
+require_relative 'rook'
+
 class Board
 
     attr_reader :grid 
@@ -24,10 +27,6 @@ class Board
     def in_bounds?(location)
         row, column = location
         row < grid.length && column < grid.first.length && row >= 0 && column >= 0
-    end
-
-    def get_piece(location)
-
     end
 end
 

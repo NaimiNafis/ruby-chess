@@ -52,4 +52,37 @@ describe Board do
             expect(board.in_bounds?(location)).to eql(false)
         end
     end
+
+    describe "#[]" do
+        it "set pawn ♙ on grid" do
+            board = Board.new
+            location = [0, 0]
+            board[location] = Pawn.new([0, 1], :black).to_s
+            expect(board[location]).to eql("♙")
+        end
+
+        it "set pawn ♟ on grid" do
+            board = Board.new
+            location = [0, 0]
+            board[location] = Pawn.new([1, 1], :white).to_s
+            expect(board[location]).to eql("♟")
+        end
+
+        it "get any pieces using location on grid" do
+            board = Board.new
+            board[[0, 0]] = Rook.new([0, 0], :white).to_s
+            board[[1, 0]] = Pawn.new([1, 0], :white).to_s
+            board[[1, 1]] = Pawn.new([1, 1], :white).to_s
+            board[[1, 2]] = Pawn.new([1, 2], :white).to_s
+            board[[1, 3]] = Pawn.new([1, 3], :white).to_s
+            expected_result = [
+                ["♜", "X", nil, "X"],
+                ["♟", "♟", "♟", "♟"],
+                ["X", "X", nil, "X"],
+                ["X", "X", nil, "X"],
+            ]
+            expect(board.grid).to eql(expected_result)
+        end
+    end
+
 end
