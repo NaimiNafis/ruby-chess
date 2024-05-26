@@ -2,8 +2,7 @@ class Rook
 
     attr_reader :color
     
-    def initialize(location, color)
-        @location = location
+    def initialize(color)
         @color = color
     end
 
@@ -20,11 +19,4 @@ class Rook
         ]
     end
 
-    def row #getter
-        @location.first
-    end
-
-    def column #getter
-        @location.last
-    end
 end
