@@ -16,14 +16,14 @@ class Board
 
         # inside do |()|, if we use (), it wil destructured the element inside
         [[0, :black], [7, :white]].each do |(row, colour)|
-            board[row][0] = Rook.new(colour).to_s
-            board[row][7] = Rook.new(colour).to_s
-            board[row][1] = Knight.new(colour).to_s
-            board[row][6] = Knight.new(colour).to_s
-            board[row][2] = Bishop.new(colour).to_s
-            board[row][5] = Bishop.new(colour).to_s
-            board[row][3] = Queen.new(colour).to_s
-            board[row][4] = King.new(colour).to_s
+            board[[row, 0]] = Rook.new(colour).to_s
+            board[[row, 7]] = Rook.new(colour).to_s
+            board[[row, 1]] = Knight.new(colour).to_s
+            board[[row, 6]] = Knight.new(colour).to_s
+            board[[row, 2]] = Bishop.new(colour).to_s
+            board[[row, 5]] = Bishop.new(colour).to_s
+            board[[row, 3]] = Queen.new(colour).to_s
+            board[[row, 4]] = King.new(colour).to_s
         end
 
         board
