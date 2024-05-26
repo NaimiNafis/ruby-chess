@@ -68,4 +68,22 @@ describe Board do
         end
     end
 
+    describe "#self.start_chess" do
+
+        it "return factory method for full pieces in chess board" do
+            board = Board.start_chess
+            expected_result = [
+                ["♖", "♘", "♗", "♕", "♔", "♗", "♘", "♖"],
+                ["♙", "♙", "♙", "♙", "♙", "♙", "♙", "♙"],
+                [nil, nil, nil, nil, nil, nil, nil, nil],
+                [nil, nil, nil, nil, nil, nil, nil, nil],
+                [nil, nil, nil, nil, nil, nil, nil, nil],
+                [nil, nil, nil, nil, nil, nil, nil, nil],
+                ["♟", "♟", "♟", "♟", "♟", "♟", "♟", "♟"],
+                ["♜", "♞", "♝", "♛", "♚", "♝", "♞", "♜"],
+            ]
+            expect(board).to eql(expected_result)
+        end
+    end
+
 end
