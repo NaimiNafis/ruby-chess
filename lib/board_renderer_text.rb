@@ -9,11 +9,11 @@ class BoardRendererText
   end
 
   def render
-    size = @board.grid.size
+    size = board.grid.size
     column_labels = ('a'..'z').first(size).join('   ')
     border = "+---" * size + "+"
 
-    rows = @board.grid.each_with_index.map do |row, i|
+    rows = board.grid.each_with_index.map do |row, i|
       row_content = row.map { |cell| cell.nil? ? '.' : cell.to_s }.join(' | ')
       "#{size - i} | #{row_content} | #{size - i}"
     end

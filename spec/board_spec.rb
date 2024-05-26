@@ -70,7 +70,7 @@ describe Board do
 
     describe "#self.start_chess" do
 
-        it "return factory method for full pieces in chess board" do
+        it "returns a board with all pieces in their starting positions" do
             board = Board.start_chess
             expected_result = [
                 ["♖", "♘", "♗", "♕", "♔", "♗", "♘", "♖"],
