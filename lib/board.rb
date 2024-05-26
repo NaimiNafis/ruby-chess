@@ -3,14 +3,9 @@ require_relative 'chess_pieces/chess_pieces'
 class Board
 
     attr_reader :grid 
-    
-    def initialize
-        @grid = [
-            ["X", "X", nil, "X"],
-            ["X", "X", nil, "X"],
-            ["X", "X", nil, "X"],
-            ["X", "X", nil, "X"],
-        ]
+
+    def initialize( n = 8 )
+        @grid = Array.new(n) { Array.new(n) }
     end
 
     def []=(location, piece) #Operator Overloading
@@ -30,7 +25,7 @@ class Board
 end
 
 
-
+# class Board only used for maintaining internal represatation, having a little validation logic
 # place pieces
 # out of bounds
 # get a piece at spesific position
