@@ -1,4 +1,4 @@
-require './lib/pawn'
+require './lib/chess_pieces/pawn'
 
 describe Pawn do
     describe "to_s" do

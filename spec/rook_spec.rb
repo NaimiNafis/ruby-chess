@@ -1,4 +1,4 @@
-require './lib/rook'
+require './lib/chess_pieces/rook'
 
 describe Rook do
     describe "to_s" do

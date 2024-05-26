@@ -58,14 +58,17 @@ describe Board do
         it "get any pieces using location on grid" do
             board = Board.new
             board[[0, 0]] = Rook.new(:white).to_s
-            board[[1, 0]] = Pawn.new(:white).to_s
+            board[[0, 1]] = Knight.new(:white).to_s
+            board[[0, 2]] = Bishop.new(:white).to_s
+            board[[0, 3]] = Queen.new(:white).to_s
+            board[[1, 0]] = King.new(:white).to_s
             board[[1, 1]] = Pawn.new(:white).to_s
             board[[1, 2]] = Pawn.new(:white).to_s
             board[[1, 3]] = Pawn.new(:white).to_s
             board[[3, 3]] = Pawn.new(:black).to_s
             expected_result = [
-                ["♜", "X", nil, "X"],
-                ["♟", "♟", "♟", "♟"],
+                ["♜", "♞", "♝", "♛"],
+                ["♚", "♟", "♟", "♟"],
                 ["X", "X", nil, "X"],
                 ["X", "X", nil, "♙"],
             ]

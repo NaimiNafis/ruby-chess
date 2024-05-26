@@ -1,5 +1,4 @@
-require_relative 'pawn'
-require_relative 'rook'
+require_relative 'chess_pieces/chess_pieces'
 
 class Board
 
