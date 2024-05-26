@@ -9,22 +9,24 @@ class BoardRendererText
   end
 
   def render
+    size = @board.grid.size
+    column_labels = ('a'..'z').first(size).join('   ')
+    border = "+---" * size + "+"
+
     rows = @board.grid.each_with_index.map do |row, i|
       row_content = row.map { |cell| cell.nil? ? '.' : cell.to_s }.join(' | ')
-      "#{4 - i} | #{row_content} | #{4 - i}"
+      "#{size - i} | #{row_content} | #{size - i}"
     end
 
     # heredoc syntax ~, more readable multi-line string
     board_string = <<~BOARD
-          a   b   c   d
-        +---+---+---+---+
-      #{rows.join("\n  +---+---+---+---+\n")}
-        +---+---+---+---+
-          a   b   c   d
+      #{'    ' if size < 10}#{column_labels}
+      #{'  ' if size < 10}#{border}
+      #{rows.join("\n#{'  ' if size < 10}#{border}\n")}
+      #{'  ' if size < 10}#{border}
+      #{'    ' if size < 10}#{column_labels}
     BOARD
 
     board_string
-    
-
   end
 end

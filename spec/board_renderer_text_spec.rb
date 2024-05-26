@@ -17,7 +17,7 @@ describe BoardRendererText do
   
         text_board = BoardRendererText.new(board)
   
-        expected_result = <<~BOARD.chomp
+        expected_result = <<~BOARD
               a   b   c   d
             +---+---+---+---+
           4 | ♜ | ♞ | ♝ | ♛ | 4
