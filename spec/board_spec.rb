@@ -3,24 +3,16 @@ require './lib/board'
 describe Board do
     describe "#[]=" do
         it "get any pieces using location on grid" do
-            board = Board.new
+            board = Board.new(4)
             location = [0, 0]
             expected_result = [
-                ["Y", "X", nil, "X"],
-                ["X", "X", nil, "X"],
-                ["X", "X", nil, "X"],
-                ["X", "X", nil, "X"],
+                ["Y", nil, nil, nil],
+                [nil, nil, nil, nil],
+                [nil, nil, nil, nil],
+                [nil, nil, nil, nil],
             ]
             board[location] = "Y"
             expect(board.grid).to eql(expected_result)
-            expect(board[[1, 1]]).to eql("X")
-            expect(board[[1, 2]]).to eql(nil)
-        end
-
-        it "return 'X' on any location marked 'X'" do
-            board = Board.new
-            location = [1, 1]
-            expect(board[location]).to eql("X")
         end
 
         it "return nil on any location marked nil" do
@@ -56,7 +48,7 @@ describe Board do
     describe "#[]" do
 
         it "get any pieces using location on grid" do
-            board = Board.new
+            board = Board.new(4)
             board[[0, 0]] = Rook.new(:white).to_s
             board[[0, 1]] = Knight.new(:white).to_s
             board[[0, 2]] = Bishop.new(:white).to_s
@@ -69,8 +61,8 @@ describe Board do
             expected_result = [
                 ["♜", "♞", "♝", "♛"],
                 ["♚", "♟", "♟", "♟"],
-                ["X", "X", nil, "X"],
-                ["X", "X", nil, "♙"],
+                [nil, nil, nil, nil],
+                [nil, nil, nil, "♙"],
             ]
             expect(board.grid).to eql(expected_result)
         end
