@@ -82,7 +82,7 @@ describe Board do
                 ["♟", "♟", "♟", "♟", "♟", "♟", "♟", "♟"],
                 ["♜", "♞", "♝", "♛", "♚", "♝", "♞", "♜"],
             ]
-            expect(board).to eql(expected_result)
+            expect(board.grid).to eql(expected_result)
         end
     end
 
