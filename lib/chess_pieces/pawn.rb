@@ -1,7 +1,5 @@
 class Pawn < Piece
 
-    include Stepable
-    
     def to_s
         # when do comparisons, it better to use symbol than string 
         # bcs it'll helps in managing memory
