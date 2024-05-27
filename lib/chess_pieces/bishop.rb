@@ -1,10 +1,4 @@
-class Bishop
-
-    attr_reader :color
-    
-    def initialize(color)
-        @color = color
-    end
+class Bishop < Piece
 
     def to_s
         color == :black ? "♗" : "♝" 

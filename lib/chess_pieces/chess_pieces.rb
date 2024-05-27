@@ -1,3 +1,4 @@
+require_relative 'piece'
 require_relative 'pawn'
 require_relative 'rook'
 require_relative 'king'

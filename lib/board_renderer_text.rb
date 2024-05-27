@@ -14,7 +14,7 @@ class BoardRendererText
     border = "+---" * size + "+"
 
     rows = board.grid.each_with_index.map do |row, i|
-      row_content = row.map { |cell| cell.nil? ? '.' : cell.to_s }.join(' | ')
+      row_content = row.map { |cell| cell.nil? ? ' ' : cell.to_s }.join(' | ')
       "#{size - i} | #{row_content} | #{size - i}"
     end
 
