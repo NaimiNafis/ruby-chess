@@ -1,4 +1,5 @@
 require_relative 'piece'
+require_relative 'slideable'
 require_relative 'pawn'
 require_relative 'rook'
 require_relative 'king'
