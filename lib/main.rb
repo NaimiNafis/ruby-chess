@@ -7,10 +7,11 @@ b = Board.new
 # board = Board.new
 text_board = BoardRendererText.new(b)
 
-b[[6, 0]] = Pawn.new(b, [6, 0],:white)
-b[[5, 0]] = Pawn.new(b, [5, 0],:black)
+b[[1, 5]] = Rook.new(b, [1, 5],:white)
+b[[1, 6]] = Rook.new(b, [1, 6],:black)
+b[[1, 3]] = Rook.new(b, [1, 3],:white)
 
-piece = b[[6, 0]]
-p piece.enemy?([4, 0])
+piece = b[[1, 5]]
+p piece.available_moves
 
 puts text_board.render

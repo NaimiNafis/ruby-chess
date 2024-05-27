@@ -1,11 +1,11 @@
 class Piece
     
-    attr_reader :color, :board
+    attr_reader :color, :location, :board
     
     def initialize(board, location, color)
         @color = color
         @board = board
-        @location
+        @location = location
     end
 
     def enemy?(location)
