@@ -22,18 +22,21 @@ class Pawn < Piece
         end
 
         # if on start line, can move forward 2
-         # [0, 1] = [0, 2] / [0, 3]
-        two_forward = [current_row + forward_direction * 2, current_column]
-        if board.empty?(two_forward) && board.empty?(one_forward) && at_start?
-            moves << two_forward
+        # [0, 1] = [0, 2] / [0, 3]
+        if board.empty?(one_forward) && at_start?
+            two_forward = [current_row + forward_direction * 2, current_column]
+            if board.empty?(two_forward)
+                moves << two_forward
+            end
         end
 
         # if enemy diag, can move to there
         diag_left = [current_row + forward_direction, current_column + 1]
-        diag_right = [current_row + forward_direction, current_column + 1]
-        if enemy?(diag_left)
+        diag_right = [current_row + forward_direction, current_column - 1]
+        if board.in_bounds?(diag_left) && enemy?(diag_left)
             moves << diag_left
-        elsif enemy?(diag_right)
+        end
+        if board.in_bounds?(diag_right) && enemy?(diag_right)
             moves << diag_right
         end
 
@@ -47,13 +50,6 @@ class Pawn < Piece
         # when do comparisons, it better to use symbol than string 
         # bcs it'll helps in managing memory
         color == :black ? "♙" : "♟" 
-    end
-
-    def diagonal_moves
-        [
-            [1, 1],
-            [-1, 1]
-        ]
     end
 
 end
