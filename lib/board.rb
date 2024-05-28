@@ -10,20 +10,20 @@ class Board
         board = self.new
 
         8.times do |column|
-            board[[1, column]] = Pawn.new(self, [1, column], :black)
-            board[[6, column]] = Pawn.new(self, [6, column], :white)
+            board[[1, column]] = Pawn.new(board, [1, column], :black)
+            board[[6, column]] = Pawn.new(board, [6, column], :white)
         end
 
         # inside do |()|, if we use (), it wil destructured the element inside
         [[0, :black], [7, :white]].each do |(row, colour)|
-            board[[row, 0]] = Rook.new(self, [row, 0], colour)
-            board[[row, 7]] = Rook.new(self, [row, 7], colour)
-            board[[row, 1]] = Knight.new(self, [row, 1], colour)
-            board[[row, 6]] = Knight.new(self, [row, 6], colour)
-            board[[row, 2]] = Bishop.new(self, [row, 2], colour)
-            board[[row, 5]] = Bishop.new(self, [row, 5], colour)
-            board[[row, 3]] = Queen.new(self, [row, 3], colour)
-            board[[row, 4]] = King.new(self, [row, 4], colour)
+            board[[row, 0]] = Rook.new(board, [row, 0], colour)
+            board[[row, 7]] = Rook.new(board, [row, 7], colour)
+            board[[row, 1]] = Knight.new(board, [row, 1], colour)
+            board[[row, 6]] = Knight.new(board, [row, 6], colour)
+            board[[row, 2]] = Bishop.new(board, [row, 2], colour)
+            board[[row, 5]] = Bishop.new(board, [row, 5], colour)
+            board[[row, 3]] = Queen.new(board, [row, 3], colour)
+            board[[row, 4]] = King.new(board, [row, 4], colour)
         end
 
         board
