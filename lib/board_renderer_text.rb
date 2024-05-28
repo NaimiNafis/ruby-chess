@@ -2,7 +2,7 @@ require_relative 'chess_pieces/chess_pieces'
 
 class BoardRendererText
 
-  attr_reader :board
+  attr_accessor :board
   
   def initialize(board)
     @board = board
