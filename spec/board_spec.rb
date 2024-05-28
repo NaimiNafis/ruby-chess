@@ -86,7 +86,7 @@ describe Board do
 
     describe "#move_pieces" do
         context "when moving a piece within its available moves" do
-            xit "moves the piece to the new position" do
+            it "moves the piece to the new position" do
                 black_pawn = Pawn.new(board, [1, 2], :black)
                 board[[1, 2]] = black_pawn
                 board.move_pieces([1, 2], [2, 2])
@@ -97,15 +97,17 @@ describe Board do
         end
 
         context "when trying to move a piece to an invalid position" do
-            xit "raises an error" do
+            it "raises an error" do
                 black_pawn = Pawn.new(board, [1, 2], :black)
                 board[[1, 2]] = black_pawn
-                expect { board.move_pieces([1, 2], [3, 3]) }.to raise_error("Invalid move")
+                start_pos = [1, 2]
+                end_pos = [3, 3]
+                expect { board.move_pieces(start_pos, end_pos) }.to raise_error("End position (#{end_pos}) is not in available moves: #{board[start_pos].available_moves}")
             end
         end
 
         context "when capturing an enemy piece" do
-            xit "moves the piece and removes the enemy piece" do
+            it "moves the piece and removes the enemy piece" do
                 black_pawn = Pawn.new(board, [1, 2], :black)
                 enemy_piece = Pawn.new(board, [2, 1], :white)
                 board[[1, 2]] = black_pawn
@@ -118,20 +120,24 @@ describe Board do
         end
 
         context "when trying to move a piece out of bounds" do
-            xit "raises an error" do
+            it "raises an error" do
                 black_pawn = Pawn.new(board, [1, 2], :black)
                 board[[1, 2]] = black_pawn
-                expect { board.move_pieces([1, 2], [-1, -1]) }.to raise_error("Invalid move")
+                start_pos = [1, 2]
+                end_pos = [-1, -1]
+                expect { board.move_pieces(start_pos, end_pos) }.to raise_error("End position (#{end_pos}) is not in available moves: #{board[start_pos].available_moves}")
             end
         end
 
         context "when moving a piece to an occupied position by the same color" do
-            xit "raises an error" do
+            it "raises an error" do
                 black_pawn = Pawn.new(board, [1, 2], :black)
                 blocking_piece = Pawn.new(board, [2, 2], :black)
                 board[[1, 2]] = black_pawn
                 board[[2, 2]] = blocking_piece
-                expect { board.move_pieces([1, 2], [2, 2]) }.to raise_error("Invalid move")
+                start_pos = [1, 2]
+                end_pos = [2, 2]
+                expect { board.move_pieces(start_pos, end_pos) }.to raise_error("End position (#{end_pos}) is not in available moves: #{board[start_pos].available_moves}")
             end
         end
     end
