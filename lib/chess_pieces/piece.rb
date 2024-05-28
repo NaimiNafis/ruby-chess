@@ -12,4 +12,12 @@ class Piece
       !board[location].nil? && board[location].color != color 
     end
 
+    def current_column
+      location.first
+    end
+
+    def current_row
+      location.last
+    end
+
 end
