@@ -1,17 +1,20 @@
 require_relative 'board_renderer_text'
 require_relative 'board'
 
-# use board.start_chess for factory set instead because let say we want to
-# test how any piece move in empty board, we can just call Board.new
-b = Board.start_chess
-# board = Board.new
-text_board = BoardRendererText.new(b)
+# TODO:
+#   add logic for "moving and taking a piece"
+#   add logic for "won"
+#   add logic for taking turns
 
-b[[2, 5]] = Pawn.new(b, [2, 5],:black)
+# board = Board.new
+# b[[1, 2]] = Pawn.new(b, [1, 2],:black)
 # b[[1, 6]] = Rook.new(b, [1, 6],:black)
 # b[[1, 4]] = Rook.new(b, [1, 4],:white)
 
-piece = b[[2, 5]]
+b = Board.start_chess
+text_board = BoardRendererText.new(b)
+
+piece = b[[1, 2]]
 p piece.available_moves
 
 puts text_board.render
