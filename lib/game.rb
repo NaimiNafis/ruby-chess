@@ -20,13 +20,19 @@ class Game
         while !over?
             renderer.render
             puts "It's #{current_player.color} turn"
+            if board.in_check?(current_player.color)
+                puts "#{current_player.color} is in check!"
+            end
             take_turn
             swap_player!
         end
+        swap_player!
+        puts "Game Over! The winner is : #{current_player.color}"
+        renderer.render
     end
 
     def over?
-      false
+        board.checkmate?(current_player.color)
     end
 
     def take_turn
