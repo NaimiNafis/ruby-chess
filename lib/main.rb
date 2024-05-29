@@ -5,9 +5,7 @@ require_relative 'player'
 require_relative 'game'
 
 # TODO:
-#   add logic for "moving and taking a piece"
 #   add logic for "won"
-#   add logic for taking turns
 
 # board = Board.new
 # b[[1, 2]] = Pawn.new(b, [1, 2],:black)

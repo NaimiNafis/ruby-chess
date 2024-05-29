@@ -142,26 +142,22 @@ describe Board do
 
     describe '#in_check?' do
         let(:board) { Board.new }
-        let(:white_king) { King.new(board, [7, 4], :white) }
-        let(:black_king) { King.new(board, [0, 4], :black) }
-        let(:white_rook) { Rook.new(board, [7, 0], :white) }
-        let(:black_knight) { Knight.new(board, [5, 2], :black) }
+        let(:white_king) { King.new(board, [6, 6], :white) }
+        let(:black_king) { King.new(board, [1, 1], :black) }
+        let(:white_queen) { Queen.new(board, [2, 2], :white) }
 
         before do
-            board[[7, 4]] = white_king
-            board[[0, 4]] = black_king
-            board[[7, 0]] = white_rook
-            board[[5, 2]] = black_knight
+            board[[6, 6]] = white_king
+            board[[1, 1]] = black_king
+            board[[2, 2]] = white_queen
         end
 
         it 'returns false when the king is not in check' do
             expect(board.in_check?(:white)).to be_falsey
-            expect(board.in_check?(:black)).to be_falsey
         end
 
         it 'returns true when the king is in check' do
-            board[[6, 2]] = black_knight # Move black knight to a position that puts the white king in check
-            expect(board.in_check?(:white)).to be_truthy
+            expect(board.in_check?(:black)).to be_truthy
         end
     end
 end

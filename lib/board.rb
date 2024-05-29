@@ -53,19 +53,18 @@ class Board
     end
 
     def in_check?(color)
-        king_pos = pieces
-            .find {|p| p.color == color && p.is_a?(King)}
-            .location
-        
-        # loop over all the pieces of the opposite color
-        pieces.select {|p| p.color != color }.each do |piece|
-            # if any piece has an available move with the position
-            # of the king with color, then color is in check.
-            if piece.available_moves.include?(king_pos)
-                return true
-            end 
+        king_pos = pieces.find { |p| p.color == color && p.is_a?(King) }&.location
+    
+        return false if king_pos.nil?
+    
+        # Loop over all the pieces of the opposite color
+        pieces.select { |p| p.color != color }.each do |piece|
+          # If any piece has an available move with the position
+          # of the king with color, then color is in check.
+          return true if piece.available_moves.include?(king_pos)
         end
-        false 
+    
+        false
     end
 
     def pieces(color = nil)
