@@ -53,8 +53,9 @@ class Board
     end
 
     def in_check?(color)
-        king_pos = pieces.find { |p| p.color == color && p.is_a?(King) }&.location
-    
+        king = pieces.find { |p| p.color == color && p.is_a?(King) }
+        king_pos = king.location
+
         return false if king_pos.nil?
     
         # Loop over all the pieces of the opposite color
@@ -71,6 +72,15 @@ class Board
         all_pieces = grid.flatten.compact
         return all_pieces if color.nil?
         all_pieces.select { |piece| piece.color == color }
+    end
+
+    def checkmate?(color)
+        return false if !in_check?(color)
+
+        king = pieces.find { |p| p.color == color && p.is_a?(King) }
+    
+        # compare the king's available moves with the available moves of the enemy pieces. 
+        # if all the king's available moves are in the enemy pieces' then return true.
     end
 
     def move_piece(start_pos, end_pos)
