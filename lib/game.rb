@@ -11,13 +11,25 @@ class Game
         @current_player = @player1
     end
 
-    def swap!
-        current_player == player1 ? player2 : player1
+    def swap_player!
+        # Use self.current_player to call the setter method
+        self.current_player = (current_player == player1) ? player2 : player1
     end
 
     def play
-        puts renderer.render
-        puts "It's #{current_player.color} turn"
+        while !over?
+            renderer.render
+            puts "It's #{current_player.color} turn"
+            take_turn
+            swap_player!
+        end
+    end
+
+    def over?
+      false
+    end
+
+    def take_turn
         start_pos = nil
         
         # prompt start pos
