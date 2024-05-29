@@ -76,11 +76,35 @@ class Board
 
     def checkmate?(color)
         return false if !in_check?(color)
-
-        king = pieces.find { |p| p.color == color && p.is_a?(King) }
     
-        # compare the king's available moves with the available moves of the enemy pieces. 
-        # if all the king's available moves are in the enemy pieces' then return true.
+        # Iterate over all pieces of the given color
+        pieces(color).each do |piece|
+          piece.available_moves.each do |move|
+            # Make a hypothetical move
+            original_position = piece.location
+            destination_piece = self[move]
+    
+            self[move] = piece
+            self[original_position] = nil
+            piece.location = move
+    
+            # Check if the move leaves the king still in check
+            if !in_check?(color)
+              # Undo the hypothetical move
+              self[original_position] = piece
+              self[move] = destination_piece
+              piece.location = original_position
+              return false
+            end
+    
+            # Undo the hypothetical move
+            self[original_position] = piece
+            self[move] = destination_piece
+            piece.location = original_position
+          end
+        end
+        # If no valid moves were found to escape check, it's checkmate!
+        true
     end
 
     def move_piece(start_pos, end_pos)

@@ -7,10 +7,10 @@ require_relative 'game'
 # TODO:
 #   add logic for "won"
 
-# board = Board.new
-# b[[1, 2]] = Pawn.new(b, [1, 2],:black)
-# b[[1, 6]] = Rook.new(b, [1, 6],:black)
-# b[[1, 4]] = Rook.new(b, [1, 4],:white)
+b = Board.new
+b[[6, 6]] = King.new(b, [6, 6], :white)
+b[[1, 1]] = King.new(b, [1, 1], :black)
+b[[2, 2]] = Queen.new(b, [2, 2], :white)
 
 # b = Board.start_chess
 # text_board = BoardRendererText.new(b)
@@ -18,6 +18,6 @@ require_relative 'game'
 # p piece.available_moves
 # puts text_board.render
 
-b = Board.start_chess
+# b = Board.start_chess
 game = Game.new(b, Player.new(:black), Player.new(:white), BoardRendererText)
 game.play
