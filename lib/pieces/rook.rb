@@ -1,5 +1,5 @@
 require_relative 'piece'
-require_relative 'slideable'
+require_relative '../module/slideable'
 
 class Rook < Piece
 

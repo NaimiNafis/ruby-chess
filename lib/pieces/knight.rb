@@ -1,4 +1,5 @@
 require_relative 'piece'
+require_relative '../module/slideable'
 
 class Knight < Piece
 
