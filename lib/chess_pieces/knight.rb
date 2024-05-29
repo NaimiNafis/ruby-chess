@@ -2,6 +2,8 @@ require_relative 'piece'
 
 class Knight < Piece
 
+    include Stepable
+    
     def to_s
         color == :black ? "♘" : "♞" 
     end
