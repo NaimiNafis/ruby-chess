@@ -17,22 +17,33 @@ class Game
     end
 
     def play
-        while !over?
+        loop do
             renderer.render
-            puts "It's #{current_player.color} turn"
-            if board.in_check?(current_player.color)
-                puts "#{current_player.color} is in check!"
+            puts "It's #{current_player.color}'s turn"
+
+            if board.checkmate?(current_player.color)
+                puts "#{current_player.color.capitalize} is in checkmate!"
+                break
+            elsif board.in_check?(current_player.color)
+                puts "#{current_player.color.capitalize} is in check!"
             end
+
             take_turn
+
+            if board.checkmate?(current_player.color)
+                renderer.render
+                puts "#{current_player.color.capitalize} is in checkmate!"
+                break
+            elsif board.in_check?(current_player.color)
+                puts "#{current_player.color.capitalize} is in check!"
+            end
+
             swap_player!
         end
-        swap_player!
-        puts "Game Over! The winner is : #{current_player.color}"
+        
         renderer.render
-    end
-
-    def over?
-        board.checkmate?(current_player.color)
+        swap_player!
+        puts "\nGame Over! The winner is: #{current_player.color.capitalize}!\n"
     end
 
     def take_turn
