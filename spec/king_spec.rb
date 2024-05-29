@@ -1,5 +1,5 @@
-require_relative '../lib/chess_pieces/king'
-require_relative '../lib/chess_pieces/piece'
+require_relative '../lib/pieces/king'
+require_relative '../lib/pieces/piece'
 require_relative '../lib/board'
 
 describe King do

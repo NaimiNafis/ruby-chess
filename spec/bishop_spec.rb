@@ -1,5 +1,5 @@
-require_relative '../lib/chess_pieces/bishop'
-require_relative '../lib/chess_pieces/piece'
+require_relative '../lib/pieces/bishop'
+require_relative '../lib/pieces/piece'
 require_relative '../lib/board'
 
 describe Bishop do

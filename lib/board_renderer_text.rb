@@ -1,4 +1,4 @@
-require_relative 'chess_pieces/chess_pieces'
+require_relative 'pieces'
 
 class BoardRendererText
 

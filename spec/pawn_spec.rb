@@ -1,5 +1,5 @@
-require_relative '../lib/chess_pieces/pawn'
-require_relative '../lib/chess_pieces/piece'
+require_relative '../lib/pieces/pawn'
+require_relative '../lib/pieces/piece'
 require_relative '../lib/board'
 
 describe Pawn do

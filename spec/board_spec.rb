@@ -1,6 +1,6 @@
 require_relative '../lib/board'
 require_relative '../lib/invalid_move_error'
-require_relative '../lib/chess_pieces/chess_pieces'
+require_relative '../lib/pieces'
 
 describe Board do
     let(:board) { Board.new }

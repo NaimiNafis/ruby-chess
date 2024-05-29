@@ -1,5 +1,5 @@
-require_relative '../lib/chess_pieces/rook'
-require_relative '../lib/chess_pieces/piece'
+require_relative '../lib/pieces/rook'
+require_relative '../lib/pieces/piece'
 require_relative '../lib/board'
 
 describe Rook do
