@@ -1,4 +1,5 @@
 require_relative '../lib/board'
+require_relative '../lib/invalid_move_error'
 require_relative '../lib/chess_pieces/chess_pieces'
 
 describe Board do
@@ -84,61 +85,83 @@ describe Board do
         end
     end
 
-    describe "#move_pieces" do
-        context "when moving a piece within its available moves" do
-            it "moves the piece to the new position" do
-                black_pawn = Pawn.new(board, [1, 2], :black)
-                board[[1, 2]] = black_pawn
-                board.move_pieces([1, 2], [2, 2])
-                expect(board[[2, 2]]).to eq(black_pawn)
-                expect(board[[1, 2]]).to be_nil
-                expect(black_pawn.location).to eq([2, 2])
-            end
+    describe '#move_piece' do
+        let(:board) { Board.new }
+        let(:white_king) { King.new(board, [7, 4], :white) }
+        let(:black_king) { King.new(board, [0, 4], :black) }
+        let(:white_rook) { Rook.new(board, [7, 0], :white) }
+
+        before do
+            board[[7, 4]] = white_king
+            board[[0, 4]] = black_king
+            board[[7, 0]] = white_rook
         end
 
-        context "when trying to move a piece to an invalid position" do
-            it "raises an error" do
-                black_pawn = Pawn.new(board, [1, 2], :black)
-                board[[1, 2]] = black_pawn
-                start_pos = [1, 2]
-                end_pos = [3, 3]
-                expect { board.move_pieces(start_pos, end_pos) }.to raise_error("End position (#{end_pos}) is not in available moves: #{board[start_pos].available_moves}")
-            end
+        it 'moves a piece to a new position' do
+            board.move_piece([7, 0], [5, 0])
+            expect(board[[5, 0]]).to eq(white_rook)
+            expect(board[[7, 0]]).to be_nil
         end
 
-        context "when capturing an enemy piece" do
-            it "moves the piece and removes the enemy piece" do
-                black_pawn = Pawn.new(board, [1, 2], :black)
-                enemy_piece = Pawn.new(board, [2, 1], :white)
-                board[[1, 2]] = black_pawn
-                board[[2, 1]] = enemy_piece
-                board.move_pieces([1, 2], [2, 1])
-                expect(board[[2, 1]]).to eq(black_pawn)
-                expect(board[[1, 2]]).to be_nil
-                expect(black_pawn.location).to eq([2, 1])
-            end
+        it 'raises an error when there is no piece at the start position' do
+            expect { board.move_piece([6, 0], [5, 0]) }.to raise_error(InvalidMoveError, "No piece at [6, 0]")
         end
 
-        context "when trying to move a piece out of bounds" do
-            it "raises an error" do
-                black_pawn = Pawn.new(board, [1, 2], :black)
-                board[[1, 2]] = black_pawn
-                start_pos = [1, 2]
-                end_pos = [-1, -1]
-                expect { board.move_pieces(start_pos, end_pos) }.to raise_error("End position (#{end_pos}) is not in available moves: #{board[start_pos].available_moves}")
-            end
+        it 'raises an error when the end position is out of bounds' do
+            expect { board.move_piece([7, 4], [8, 4]) }.to raise_error(InvalidMoveError, "End position not in bounds.")
+        end
+    end
+
+
+    describe '#pieces' do
+        let(:board) { Board.new }
+        let(:white_king) { King.new(board, [7, 4], :white) }
+        let(:black_king) { King.new(board, [0, 4], :black) }
+        let(:white_rook) { Rook.new(board, [7, 0], :white) }
+        let(:black_knight) { Knight.new(board, [5, 2], :black) }
+
+        before do
+            board[[7, 4]] = white_king
+            board[[0, 4]] = black_king
+            board[[7, 0]] = white_rook
+            board[[5, 2]] = black_knight
         end
 
-        context "when moving a piece to an occupied position by the same color" do
-            it "raises an error" do
-                black_pawn = Pawn.new(board, [1, 2], :black)
-                blocking_piece = Pawn.new(board, [2, 2], :black)
-                board[[1, 2]] = black_pawn
-                board[[2, 2]] = blocking_piece
-                start_pos = [1, 2]
-                end_pos = [2, 2]
-                expect { board.move_pieces(start_pos, end_pos) }.to raise_error("End position (#{end_pos}) is not in available moves: #{board[start_pos].available_moves}")
-            end
+        it 'returns all pieces on the board' do
+            expect(board.pieces).to contain_exactly(white_king, black_king, white_rook, black_knight)
+        end
+
+        it 'returns all white pieces on the board' do
+            expect(board.pieces(:white)).to contain_exactly(white_king, white_rook)
+        end
+
+        it 'returns all black pieces on the board' do
+            expect(board.pieces(:black)).to contain_exactly(black_king, black_knight)
+        end
+    end
+
+    describe '#in_check?' do
+        let(:board) { Board.new }
+        let(:white_king) { King.new(board, [7, 4], :white) }
+        let(:black_king) { King.new(board, [0, 4], :black) }
+        let(:white_rook) { Rook.new(board, [7, 0], :white) }
+        let(:black_knight) { Knight.new(board, [5, 2], :black) }
+
+        before do
+            board[[7, 4]] = white_king
+            board[[0, 4]] = black_king
+            board[[7, 0]] = white_rook
+            board[[5, 2]] = black_knight
+        end
+
+        it 'returns false when the king is not in check' do
+            expect(board.in_check?(:white)).to be_falsey
+            expect(board.in_check?(:black)).to be_falsey
+        end
+
+        it 'returns true when the king is in check' do
+            board[[6, 2]] = black_knight # Move black knight to a position that puts the white king in check
+            expect(board.in_check?(:white)).to be_truthy
         end
     end
 end
