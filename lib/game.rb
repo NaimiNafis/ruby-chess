@@ -18,19 +18,30 @@ class Game
     def play
         puts renderer.render
         puts "It's #{current_player.color} turn"
+        start_pos = nil
         
+        # prompt start pos
         loop do
             puts "Select a piece to move: "
             start_pos = current_player.get_pos
             if !board[start_pos].nil? && board[start_pos].color != current_player.color
                 break
             end
-            puts "Did not selet a #{current_player.color} piece."
+            puts "Did not select a #{current_player.color} piece."
         end
 
-        puts "Select a position to move: "
-        end_pos = current_player.get_pos
-        p end_pos
+        # prompt end pos
+        loop do
+            puts "Select a position to move: "
+            end_pos = current_player.get_pos
+
+            begin
+                board.move_piece(start_pos, end_pos)
+                break
+            rescue InvalidMoveError => e
+                puts e.message
+            end
+        end
     end
 
 end

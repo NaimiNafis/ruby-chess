@@ -1,3 +1,4 @@
+require_relative 'invalid_move_error'
 require_relative 'board_renderer_text'
 require_relative 'board'
 require_relative 'player'
