@@ -52,21 +52,41 @@ class Board
         self[location].nil?
     end
 
+    def in_check?(color)
+        king_pos = pieces
+            .find {|p| p.color == color && p.is_a?(King)}
+            .location
+        
+        # loop over all the pieces of the opposite color
+        pieces.select {|p| p.color != color }.each do |piece|
+            # if any piece has an available move with the position
+            # of the king with color, then color is in check.
+            if piece.available_moves.include?(king_pos)
+                return true
+            end 
+        end
+        false 
+    end
+
+    def pieces(color = nil)
+        all_pieces = grid.flatten.compact
+        return all_pieces if color.nil?
+        all_pieces.select { |piece| piece.color == color }
+    end
+
     def move_piece(start_pos, end_pos)
 
         piece = self[start_pos]
         raise InvalidMoveError.new("No piece at #{start_pos}") if piece.nil?
-
-        if !piece.available_moves.include?(end_pos)
-            raise InvalidMoveError.new(
-                "End position (#{end_pos}) is not in available moves: #{piece.available_moves}"
-            )
+        
+        if !in_bounds?(end_pos)
+        raise InvalidMoveError.new("End position not in bounds.")
         end
 
-        if !in_bounds?(end_pos)
-            raise InvalidMoveError.new(
-                "End position not in bounds."
-            )
+        if !piece.available_moves.include?(end_pos)
+        raise InvalidMoveError.new(
+            "End position (#{end_pos}) is not in available moves: #{piece.available_moves}"
+        )
         end
 
         self[end_pos] = piece
