@@ -19,7 +19,7 @@ class Game
     def play
         loop do
             renderer.render
-            puts "It's #{current_player.color}'s turn"
+            puts "It's #{current_player.color.capitalize}'s turn"
 
             if board.checkmate?(current_player.color)
                 puts "#{current_player.color.capitalize} is in checkmate!"
@@ -53,10 +53,23 @@ class Game
         loop do
             puts "Select a piece to move: "
             start_pos = current_player.get_pos
-            if !board[start_pos].nil? && board[start_pos].color != current_player.color
-                break
+    
+            if board[start_pos].nil?
+                puts "There is no piece at the selected position."
+                next
             end
-            puts "Did not select a #{current_player.color} piece."
+    
+            if board[start_pos].color != current_player.color
+                puts "Did not select a #{current_player.color} piece."
+                next
+            end
+    
+            if board[start_pos].available_moves.empty?
+                puts "There are no available moves for this piece."
+                next
+            end
+    
+            break
         end
 
         # prompt end pos
