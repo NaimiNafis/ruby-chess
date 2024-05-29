@@ -1,6 +1,4 @@
 require_relative './pieces/piece'
-require_relative './pieces/slideable'
-require_relative './pieces/stepable'
 require_relative './pieces/pawn'
 require_relative './pieces/rook'
 require_relative './pieces/king'

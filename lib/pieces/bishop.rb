@@ -1,5 +1,5 @@
 require_relative 'piece'
-require_relative '../module/slideable'
+require_relative '../modules/slideable'
 
 class Bishop < Piece
 
