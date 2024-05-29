@@ -1,14 +1,17 @@
-module NotationConverter
-    def notation_to_coordinate(notation)
-        col = notation[0].ord - 'a'.ord
-        row = 8 - notation[1].to_i
-        [row, col]
-    end
+# frozen_string_literal: true
 
-    def coordinate_to_notation(coordinate)
-        col = (coordinate[1] + 'a'.ord).chr
-        row = (8 - coordinate[0]).to_s
-        "#{col}#{row}"
-    end
+# The NotationConverter module provides methods to convert
+# between chess notation (e.g., "e4") and board coordinates.
+module NotationConverter
+  def notation_to_coordinate(notation)
+    col = notation[0].ord - 'a'.ord
+    row = 8 - notation[1].to_i
+    [row, col]
+  end
+
+  def coordinate_to_notation(coordinate)
+    col = (coordinate[1] + 'a'.ord).chr
+    row = (8 - coordinate[0]).to_s
+    "#{col}#{row}"
+  end
 end
-  

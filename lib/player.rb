@@ -1,5 +1,9 @@
+# frozen_string_literal: true
+
 require_relative './modules/notation_converter'
 
+# The Player class represents a player in the chess game. It handles player
+# input for selecting and moving pieces, and maintains the player's color.
 class Player
   include NotationConverter
 
@@ -11,13 +15,11 @@ class Player
 
   def get_pos
     loop do
-      puts "Enter a position (e.g., a1, g4): "
+      puts 'Enter a position (e.g., a1, g4): '
       input = gets.chomp
-      if valid_input?(input)
-        return notation_to_coordinate(input)
-      else
-        puts "Invalid input. Please enter a valid position (e.g., a1, g4)."
-      end
+      return notation_to_coordinate(input) if valid_input?(input)
+
+      puts 'Invalid input. Please enter a valid position (e.g., a1, g4).'
     end
   end
 

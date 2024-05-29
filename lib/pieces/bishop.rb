@@ -1,21 +1,21 @@
+# frozen_string_literal: true
+
 require_relative 'piece'
 require_relative '../modules/slideable'
 
 class Bishop < Piece
+  include Slideable
 
-    include Slideable
-    
-    def to_s
-        color == :black ? "♗" : "♝" 
-    end
+  def to_s
+    color == :black ? '♗' : '♝'
+  end
 
-    def move_directions
-        [
-            [1, 1],
-            [1, -1],
-            [-1, 1],
-            [-1, -1],
-        ]
-    end
-
+  def move_directions
+    [
+      [1, 1],
+      [1, -1],
+      [-1, 1],
+      [-1, -1]
+    ]
+  end
 end
