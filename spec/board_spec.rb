@@ -160,4 +160,25 @@ describe Board do
             expect(board.in_check?(:black)).to be_truthy
         end
     end
+
+    describe '#checkmate?' do
+        let(:board) { Board.new }
+        let(:white_king) { King.new(board, [6, 6], :white) }
+        let(:black_king) { King.new(board, [0, 0], :black) }
+        let(:white_queen) { Queen.new(board, [2, 2], :white) }
+
+        before do
+            board[[6, 6]] = white_king
+            board[[0, 0]] = black_king
+            board[[2, 2]] = white_queen
+        end
+
+        it 'returns false when the king is not in checkmate' do
+            expect(board.in_check?(:white)).to be_falsey
+        end
+
+        it 'returns true when the king is in checkmate' do
+            expect(board.in_check?(:black)).to be_truthy
+        end
+    end
 end
