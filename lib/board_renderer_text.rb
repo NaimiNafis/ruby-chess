@@ -9,6 +9,7 @@ class BoardRendererText
   end
 
   def render
+    clear_screen
     size = board.grid.size
     column_labels = ('a'..'z').first(size).join('   ')
     border = "+---" * size + "+"
@@ -27,6 +28,10 @@ class BoardRendererText
       #{'    ' if size < 10}#{column_labels}
     BOARD
 
-    board_string
+    puts board_string
+  end
+
+  def clear_screen
+    system('cls') || system('clear')
   end
 end
