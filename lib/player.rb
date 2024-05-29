@@ -1,27 +1,32 @@
 class Player
 
-    attr_reader :color
+  attr_reader :color
 
-    def initialize(color)
+  def initialize(color)
       @color = color
-    end
+  end
 
-    def get_pos
-      input = gets.chomp
-      notation_to_coordinate(input)
-    end
+  def get_pos
+      loop do
+          puts "Enter a position (e.g., a1, g4): "
+          input = gets.chomp
+          if valid_input?(input)
+              return notation_to_coordinate(input)
+          else
+              puts "Invalid input. Please enter a valid position (e.g., a1, g4)."
+          end
+      end
+  end
 
-    def notation_to_coordinate(notation)
-      letter, number = notation.split("")
+  private
 
-      column = letter_to_column(letter)
-      row = 8 - number.to_i
+  def valid_input?(input)
+      input.match?(/^[a-h][1-8]$/)
+  end
 
-      [row, column]
-    end
-
-    def letter_to_column(letter)
-      letter.ord - 'a'.ord
-    end
-
+  def notation_to_coordinate(notation)
+      col = notation[0].ord - 'a'.ord
+      row = 8 - notation[1].to_i
+      [row, col]
+  end
 end
