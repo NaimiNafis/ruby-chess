@@ -14,7 +14,6 @@ require_relative './pieces/king'
 require_relative './pieces/knight'
 require_relative './pieces/pawn'
 require_relative './board'
-require_relative './board_renderer_text'
 require_relative './player'
 require_relative './game'
 
@@ -22,5 +21,5 @@ require_relative './game'
 board = Board.start_chess
 player1 = Player.new(:white)
 player2 = Player.new(:black)
-game = Game.new(board, player1, player2, BoardRendererText)
+game = Game.new(board, player1, player2)
 game.play

@@ -1,19 +1,21 @@
 # frozen_string_literal: true
 
-require_relative './modules/notation_converter'
-
 # The Game class manages the overall flow of the chess game. It handles
 # player turns, checks for check and checkmate conditions, and interfaces
 # with the board and renderer to display the game state.
+
+require_relative './modules/notation_converter'
+require_relative './modules/display'
+
 class Game
   include NotationConverter
+  include Display
 
   attr_reader :board, :player1, :player2, :renderer
   attr_accessor :current_player
 
-  def initialize(board, player1, player2, renderer_class)
+  def initialize(board, player1, player2)
     @board = board
-    @renderer = renderer_class.new(board)
     @player1 = player1
     @player2 = player2
     @current_player = @player1
@@ -26,7 +28,7 @@ class Game
 
   def play
     loop do
-      renderer.render
+      Display.render_board(board)
       puts "It's #{current_player.color.capitalize}'s turn"
 
       if board.checkmate?(current_player.color)
@@ -39,7 +41,7 @@ class Game
       take_turn
 
       if board.checkmate?(current_player.color)
-        renderer.render
+        Display.render_board(board)
         puts "#{current_player.color.capitalize} is in checkmate!"
         break
       elsif board.in_check?(current_player.color)
@@ -49,7 +51,7 @@ class Game
       swap_player!
     end
 
-    renderer.render
+    Display.render_board(board)
     swap_player!
     puts "\nGame Over! The winner is: #{current_player.color.capitalize}!\n"
   end
