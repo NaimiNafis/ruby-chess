@@ -4,8 +4,10 @@
 # player turns, checks for check and checkmate conditions, and interfaces
 # with the board and renderer to display the game state.
 
+require_relative './modules/save_manager'
 require_relative './modules/notation_converter'
 require_relative './modules/display'
+require_relative 'invalid_move_error'
 
 class Game
   include NotationConverter
@@ -20,6 +22,7 @@ class Game
     @player1 = player1
     @player2 = player2
     @current_player = player1
+    @turn_count = 0
   end
 
   def swap_player!
@@ -46,6 +49,9 @@ class Game
 
       take_turn
       swap_player!
+      @turn_count += 1
+
+      prompt_save_game if @turn_count % 5 == 0
     end
 
     Display.render_board(board)
@@ -107,9 +113,18 @@ class Game
       puts 'Select a position to move: '
       end_pos = current_player.get_pos
 
-      return end_pos if board.valid_move?(start_pos, end_pos)
-      
-      puts 'Invalid move, try again.'
+      piece = board[start_pos]
+      if piece.available_moves.include?(end_pos)
+        return end_pos
+      else
+        puts 'Invalid move, try again.'
+      end
     end
+  end
+
+  def prompt_save_game
+    puts 'Do you want to save the game? (y/n)'
+    answer = gets.chomp.downcase
+    save_game if answer == 'y'
   end
 end

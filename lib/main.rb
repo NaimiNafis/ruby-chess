@@ -21,6 +21,7 @@ require_relative './game'
 
 # Initialize components and start the game
 include Display
+include SaveManager
 
 
 def main_menu
