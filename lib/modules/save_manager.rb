@@ -14,7 +14,7 @@ module SaveManager
 
   def self.load(filename = DEFAULT_SAVE_FILE)
     if File.exist?(filename)
-      YAML.load(File.read(filename))
+      YAML.safe_load(File.read(DEFAULT_SAVE_FILE), permitted_classes: [Game, Board, Player, Bishop, King, Knight, Pawn, Queen, Rook, Symbol], aliases: true)
     else
       puts "No save file found at #{filename}"
       nil
