@@ -1,6 +1,26 @@
 # frozen_string_literal: true
 
 module Display
+    
+    def self.main_menu
+        clear_screen
+        chess_icon = <<~ICON
+        ██████╗██╗  ██╗███████╗███████╗███████╗
+        ██╔════╝██║  ██║██╔════╝██╔════╝██╔════╝
+        ██║     ███████║█████╗  ███████╗███████╗
+        ██║     ██╔══██║██╔══╝  ╚════██║╚════██║
+        ╚██████╗██║  ██║███████╗███████║███████║
+         ╚═════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝        
+        ICON
+        puts chess_icon
+        puts "Welcome to My Chess Game!"
+        puts "1. Start New Game"
+        puts "2. Load Game"
+        puts "3. Exit"
+        print "Choose an option: "
+        gets.chomp.to_i
+    end
+
     def self.clear_screen
       system('cls') || system('clear')
     end
