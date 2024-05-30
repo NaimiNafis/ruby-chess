@@ -24,7 +24,7 @@ include Display
 include SaveManager
 
 
-def main_menu
+def main
     Display.main_menu
 end
 
@@ -37,7 +37,7 @@ def start_game
 end
 
 def load_game
-    game = Game.load_game
+    game = SaveManager.load
     if game
         game.play
     else
@@ -45,12 +45,29 @@ def load_game
     end
 end
 
+def play_again?
+    loop do
+        puts "\nDo you want to play again? (y/n)"
+        answer = gets.chomp.downcase
+        case answer
+        when 'y'
+            return true
+        when 'n'
+            return false
+        else
+            puts "Invalid option, please try again."
+        end
+    end
+  end
+
 loop do
-    case main_menu
+    case main
     when 1
         start_game
+        break unless play_again?
     when 2
         load_game
+        break unless play_again?
     when 3
         puts "Goodbye!"
         break
